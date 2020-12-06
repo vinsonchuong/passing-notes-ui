@@ -1,0 +1,36 @@
+{
+  "name": "passing-notes-ui",
+  "version": "0.0.0",
+  "description": "An awesome package",
+  "keywords": [],
+  "homepage": "https://github.com/vinsonchuong/passing-notes-ui",
+  "bugs": "https://github.com/vinsonchuong/passing-notes-ui/issues",
+  "license": "MIT",
+  "author": "Vinson Chuong <vinsonchuong@gmail.com>",
+  "repository": "vinsonchuong/passing-notes-ui",
+  "scripts": {
+    "test": "xo && ava",
+    "release": "semantic-release"
+  },
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^3.13.0",
+    "semantic-release": "^17.3.0",
+    "xo": "^0.35.0"
+  },
+  "ava": {
+    "verbose": true
+  },
+  "xo": {
+    "prettier": true,
+    "space": 2,
+    "semicolon": false,
+    "rules": {
+      "import/extensions": "off",
+      "import/no-anonymous-default-export": "off",
+      "import/no-useless-path-segments": "off",
+      "unicorn/import-index": "off"
+    }
+  }
+}
