@@ -57,5 +57,8 @@
       "window",
       "document"
     ]
+  },
+  "release": {
+    "branches": ["main"]
   }
 }
