@@ -32,6 +32,7 @@
     "htm": "^3.0.4",
     "passing-notes": "^6.3.0",
     "puppet-strings": "^4.0.1",
+    "puppet-strings-chrome": "^2.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "semantic-release": "^17.3.0",

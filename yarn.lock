@@ -6514,7 +6514,15 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-puppet-strings@^4.0.1:
+puppet-strings-chrome@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/puppet-strings-chrome/-/puppet-strings-chrome-2.0.1.tgz#37909b534c83c8a19a49cae264f62d13be5ea02a"
+  integrity sha512-BhRU9mNIut7BEqyIkF+ED/jTDcFRHGBJ96V7HBRc9AUa9iIsDWj6m5Cwmhlouu5U//LFhJOzqrZ6ukGsAeX8jg==
+  dependencies:
+    puppet-strings ">=4.0.0"
+    puppeteer-core ">=5.4.1"
+
+puppet-strings@>=4.0.0, puppet-strings@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/puppet-strings/-/puppet-strings-4.0.1.tgz#3c9e22cf27a58426b622538633957f017f6c53c0"
   integrity sha512-zs/XiuB8WSjETWA9qONmBHrl0l/GsIte3S2RumRkiAeYIdTRqdlZEqZRyv8YxSaE1RoiFFJlM9lMnDx51Mee+A==

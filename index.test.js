@@ -1,17 +1,12 @@
 import test from 'ava'
 import {useTemporaryDirectory} from 'ava-patterns'
-import {
-  openBrowser,
-  closeBrowser,
-  openTab,
-  navigate,
-  findElement
-} from 'puppet-strings'
+import {closeBrowser, openTab, navigate, findElement} from 'puppet-strings'
+import {openChrome} from 'puppet-strings-chrome'
 import {startServer, stopServer, compose, Logger} from 'passing-notes'
 import serveUi from './index.js'
 
 test('serving a UI during development', async (t) => {
-  const browser = await openBrowser('chromium')
+  const browser = await openChrome()
   t.teardown(async () => {
     await closeBrowser(browser)
   })
