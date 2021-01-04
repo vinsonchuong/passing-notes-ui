@@ -18,10 +18,10 @@
   },
   "type": "module",
   "dependencies": {
-    "@babel/code-frame": "^7.10.4",
+    "@babel/code-frame": "^7.12.11",
     "cjs-module-lexer": "^1.0.0",
-    "enhanced-resolve": "^5.4.0",
-    "esbuild": "^0.8.21",
+    "enhanced-resolve": "^5.4.1",
+    "esbuild": "^0.8.29",
     "lodash": "^4.17.20",
     "passing-notes-static": "^1.2.0"
   },
@@ -30,16 +30,16 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.2",
-    "ava": "^3.14.0",
+    "ava": "^3.15.0",
     "ava-patterns": "^2.4.1",
     "htm": "^3.0.4",
-    "passing-notes": "^6.3.0",
+    "passing-notes": "^6.3.1",
     "puppet-strings": "^4.0.1",
     "puppet-strings-chrome": "^2.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "semantic-release": "^17.3.0",
-    "xo": "^0.36.1"
+    "semantic-release": "^17.3.1",
+    "xo": "^0.37.1"
   },
   "ava": {
     "verbose": true
@@ -50,10 +50,7 @@
     "semicolon": false,
     "rules": {
       "no-await-in-loop": "off",
-      "import/extensions": "off",
       "import/no-anonymous-default-export": "off",
-      "import/no-useless-path-segments": "off",
-      "unicorn/import-index": "off",
       "unicorn/prevent-abbreviations": "off"
     },
     "globals": [
@@ -62,6 +59,8 @@
     ]
   },
   "release": {
-    "branches": ["main"]
+    "branches": [
+      "main"
+    ]
   }
 }
