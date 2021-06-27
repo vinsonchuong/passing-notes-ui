@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import serveStatic from 'passing-notes-static'
 import flowRight from 'lodash/flowRight.js'
 import {compileFile, compilePackages, formatFrame} from './lib/index.js'

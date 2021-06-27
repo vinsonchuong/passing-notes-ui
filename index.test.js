@@ -15,10 +15,13 @@ test('serving a UI during development', async (t) => {
 
   const logger = new Logger()
   const logs = []
-  logger.on('log', (entry) => logs.push(entry))
+  logger.on('log', (entry) => {
+    t.log(entry)
+    logs.push(entry)
+  })
 
   const server = await startServer(
-    {port: 10001},
+    {port: 10_001},
     compose(serveUi({path: directory.path, logger}), () => () => ({
       status: 404
     }))
@@ -45,7 +48,9 @@ test('serving a UI during development', async (t) => {
   `
   )
 
-  const tab = await openTab(browser, 'http://localhost:10001', {timeout: 10000})
+  const tab = await openTab(browser, 'http://localhost:10001', {
+    timeout: 10_000
+  })
   await findElement(tab, 'div', 'Hello World!')
 
   t.is(logs.length, 2)
@@ -65,7 +70,7 @@ test('serving a UI during development', async (t) => {
   `
   )
 
-  await navigate(tab, 'http://localhost:10001', {timeout: 10000})
+  await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
   await findElement(tab, 'div', 'Hello React!')
 
   t.is(logs.length, 4)
@@ -74,7 +79,7 @@ test('serving a UI during development', async (t) => {
   t.like(logs.shift(), {message: 'Compiling npm Packages'})
   t.like(logs.shift(), {message: 'Compiling npm Packages › Finished'})
 
-  await navigate(tab, 'http://localhost:10001', {timeout: 10000})
+  await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
   await findElement(tab, 'div', 'Hello React!')
 
   t.is(logs.length, 2)
@@ -95,7 +100,7 @@ test('serving a UI during development', async (t) => {
   `
   )
 
-  await navigate(tab, 'http://localhost:10001', {timeout: 10000})
+  await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
 
   t.is(logs.length, 5)
   t.like(logs.shift(), {message: 'Compiling UI'})
@@ -121,7 +126,7 @@ test('serving a UI during development', async (t) => {
   `
   )
 
-  await navigate(tab, 'http://localhost:10001', {timeout: 10000})
+  await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
 
   t.is(logs.length, 2)
   t.like(logs.shift(), {message: 'Compiling UI'})
