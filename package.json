@@ -13,6 +13,9 @@
   "author": "Vinson Chuong <vinsonchuong@gmail.com>",
   "repository": "vinsonchuong/passing-notes-ui",
   "main": "index.js",
+  "bin": {
+    "serve-ui": "cli/serve-ui.js"
+  },
   "scripts": {
     "test": "xo && ava",
     "release": "semantic-release"
@@ -20,27 +23,25 @@
   "type": "module",
   "dependencies": {
     "@babel/code-frame": "^7.14.5",
-    "cjs-module-lexer": "^1.2.1",
+    "cjs-module-lexer": "^1.2.2",
     "enhanced-resolve": "^5.8.2",
     "esbuild": "^0.12.15",
     "lodash": "^4.17.21",
-    "passing-notes-static": "^1.2.0"
-  },
-  "peerDependencies": {
-    "passing-notes": "^6.2.0"
+    "passing-notes": "^6.5.4",
+    "passing-notes-static": "^1.2.1"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.1",
     "ava": "^3.15.0",
-    "ava-patterns": "^2.4.1",
+    "ava-patterns": "^2.4.4",
     "htm": "^3.1.0",
-    "passing-notes": "^6.5.0",
-    "puppet-strings": "^4.1.0",
-    "puppet-strings-chrome": "^2.0.2",
+    "puppet-strings": "^4.1.1",
+    "puppet-strings-chrome": "^2.0.3",
+    "quick-install": "^2.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "semantic-release": "^17.4.4",
-    "xo": "^0.41.0"
+    "xo": "^0.42.0"
   },
   "ava": {
     "verbose": true,

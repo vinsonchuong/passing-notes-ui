@@ -21,9 +21,18 @@ by running:
 yarn add passing-notes-ui
 ```
 
-Then, compose it with other middleware, or at least a default handler:
+Given a directory (say, `./ui`) containing HTML, CSS, and JS files, we provide
+several ways to serve them over HTTP.
 
-```js
+To quickly start a server that does nothing aside from serving those files:
+
+```bash
+yarn serve-ui ./ui
+```
+
+To add this functionality as a middleware to an existing app:
+
+```javascript
 import {compose, Logger} from 'passing-notes'
 import serveUi from 'passing-notes-ui'
 
@@ -39,4 +48,4 @@ export default compose(
 also compiling npm packages as needed. Other files are served as static files.
 
 Currently, `serveUi` compiles as needed on each request. In the future, it may
-instead compile when files change.
+instead compile only when files change.
