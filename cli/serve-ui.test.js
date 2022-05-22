@@ -1,3 +1,4 @@
+import process from 'node:process'
 import test from 'ava'
 import {useTemporaryDirectory, runProcess} from 'ava-patterns'
 import install from 'quick-install'
@@ -14,7 +15,7 @@ test('quickly serving a UI from the command line', async (t) => {
         "start": "serve-ui ."
       }
     }
-  `
+  `,
   )
   await install(process.cwd(), directory.path)
   await directory.writeFile(
@@ -23,15 +24,15 @@ test('quickly serving a UI from the command line', async (t) => {
     <!doctype html>
     <meta charset="utf-8">
     <div>Hello World!</div>
-  `
+  `,
   )
 
   const server = runProcess(t, {
-    command: ['yarn', 'start'],
+    command: ['npm', 'start'],
     cwd: directory.path,
     env: {
-      PORT: '10002'
-    }
+      PORT: '10002',
+    },
   })
 
   await server.waitForOutput('Listening', 5000)
@@ -42,7 +43,7 @@ test('quickly serving a UI from the command line', async (t) => {
   })
 
   const tab = await openTab(browser, 'http://localhost:10002', {
-    timeout: 10_000
+    timeout: 10_000,
   })
   await findElement(tab, 'div', 'Hello World!')
 

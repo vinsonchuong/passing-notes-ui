@@ -23,8 +23,8 @@ test('serving a UI during development', async (t) => {
   const server = await startServer(
     {port: 10_001},
     compose(serveUi({path: directory.path, logger}), () => () => ({
-      status: 404
-    }))
+      status: 404,
+    })),
   )
   t.teardown(async () => {
     await stopServer(server)
@@ -38,18 +38,18 @@ test('serving a UI during development', async (t) => {
     <title>App</title>
     <script type="module" src="/index.js"></script>
     <div id="app-container"></div>
-  `
+  `,
   )
 
   await directory.writeFile(
     'index.js',
     `
     document.querySelector('#app-container').textContent = 'Hello World!'
-  `
+  `,
   )
 
   const tab = await openTab(browser, 'http://localhost:10001', {
-    timeout: 10_000
+    timeout: 10_000,
   })
   await findElement(tab, 'div', 'Hello World!')
 
@@ -67,7 +67,7 @@ test('serving a UI during development', async (t) => {
       html\`<span>Hello React!</span>\`,
       document.querySelector('#app-container')
     )
-  `
+  `,
   )
 
   await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
@@ -97,7 +97,7 @@ test('serving a UI during development', async (t) => {
       html\`<span>Hello React!</span>\`,
       document.querySelector('#app-container')
     )
-  `
+  `,
   )
 
   await navigate(tab, 'http://localhost:10001', {timeout: 10_000})
@@ -107,7 +107,7 @@ test('serving a UI during development', async (t) => {
   t.like(logs.shift(), {message: 'Compiling UI › Finished'})
   t.like(logs.shift(), {message: 'Compiling npm Packages'})
   t.like(logs.shift(), {
-    message: 'Could not resolve module path: missing-package'
+    message: 'Could not resolve module path: missing-package',
   })
   t.like(logs.shift(), {message: 'Compiling npm Packages › Finished'})
 
@@ -123,7 +123,7 @@ test('serving a UI during development', async (t) => {
       html\`<span>Hello React!</span>\`,
       document.querySelector('#app-container')
     )
-  `
+  `,
   )
 
   await navigate(tab, 'http://localhost:10001', {timeout: 10_000})

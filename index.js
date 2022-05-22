@@ -23,7 +23,7 @@ export default function ({path: directory, logger}) {
         const finishCompileFile = logger.measure({
           level: 'INFO',
           topic: 'UI',
-          message: 'Compiling UI'
+          message: 'Compiling UI',
         })
         const {code, dependencies} = await compileFile(filePath)
         finishCompileFile({message: 'Finished'})
@@ -35,9 +35,9 @@ export default function ({path: directory, logger}) {
           headers: {
             'content-length': `${code.length}`,
             'content-type': 'application/javascript; charset=utf-8',
-            'cache-control': 'no-store'
+            'cache-control': 'no-store',
           },
-          body: code
+          body: code,
         }
       } catch (error) {
         if (error.errors) {
@@ -48,14 +48,14 @@ export default function ({path: directory, logger}) {
                 topic: 'UI',
                 message: [
                   `Compile Error in: ${e.location.file}`,
-                  await formatFrame(e)
-                ].join('\n')
+                  await formatFrame(e),
+                ].join('\n'),
               })
             } else {
               logger.log({
                 level: 'ERROR',
                 topic: 'UI',
-                message: `Compile Error: ${e.text}`
+                message: `Compile Error: ${e.text}`,
               })
             }
           }
@@ -64,13 +64,13 @@ export default function ({path: directory, logger}) {
             level: 'ERROR',
             topic: 'UI',
             message: 'Compile Error',
-            error
+            error,
           })
         }
 
         return {status: 500}
       }
     },
-    serveStatic(directory)
+    serveStatic(directory),
   )
 }
