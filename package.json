@@ -24,15 +24,15 @@
   "dependencies": {
     "@babel/code-frame": "^7.18.6",
     "cjs-module-lexer": "^1.2.2",
-    "enhanced-resolve": "^5.9.3",
-    "esbuild": "^0.14.47",
+    "enhanced-resolve": "^5.10.0",
+    "esbuild": "^0.14.54",
     "lodash": "^4.17.21",
     "passing-notes": "^6.5.7",
     "passing-notes-static": "^1.2.3"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.4",
-    "ava": "^4.3.0",
+    "ava": "^4.3.1",
     "ava-patterns": "^3.0.2",
     "goober": "^2.1.10",
     "htm": "^3.1.1",
@@ -42,7 +42,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "semantic-release": "^19.0.3",
-    "xo": "^0.50.0"
+    "xo": "^0.51.0"
   },
   "ava": {
     "verbose": true,
