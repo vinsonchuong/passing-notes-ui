@@ -3816,6 +3816,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"goober@npm:^2.1.10":
+  version: 2.1.10
+  resolution: "goober@npm:2.1.10"
+  peerDependencies:
+    csstype: ^3.0.10
+  checksum: 55a353a477665ea3ae748153132a32184a6a0db42b24ec66cdca97d1e046a2b63af29f698e245fe2f51c05d0eaefeda2cce4a106bc2b6293ea67490c39b6b5c8
+  languageName: node
+  linkType: hard
+
 "graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.4":
   version: 4.2.4
   resolution: "graceful-fs@npm:4.2.4"
@@ -6635,6 +6644,7 @@ __metadata:
     cjs-module-lexer: ^1.2.2
     enhanced-resolve: ^5.9.3
     esbuild: ^0.14.47
+    goober: ^2.1.10
     htm: ^3.1.1
     lodash: ^4.17.21
     passing-notes: ^6.5.7
