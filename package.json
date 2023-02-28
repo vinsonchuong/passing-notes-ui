@@ -24,25 +24,25 @@
   "dependencies": {
     "@babel/code-frame": "^7.18.6",
     "cjs-module-lexer": "^1.2.2",
-    "enhanced-resolve": "^5.10.0",
-    "esbuild": "^0.14.54",
+    "enhanced-resolve": "^5.12.0",
+    "esbuild": "^0.17.10",
     "lodash": "^4.17.21",
     "passing-notes": "^6.5.7",
-    "passing-notes-static": "^1.2.3"
+    "passing-notes-static": "^1.3.0"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.4",
-    "ava": "^4.3.1",
-    "ava-patterns": "^3.0.2",
-    "goober": "^2.1.10",
+    "ava": "^4.3.3",
+    "ava-patterns": "^3.2.0",
+    "goober": "^2.1.12",
     "htm": "^3.1.1",
     "puppet-strings": "^4.1.3",
     "puppet-strings-chrome": "^2.0.3",
-    "quick-install": "^2.0.2",
+    "quick-install": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "semantic-release": "^19.0.3",
-    "xo": "^0.51.0"
+    "semantic-release": "^20.1.0",
+    "xo": "^0.53.1"
   },
   "ava": {
     "verbose": true,
