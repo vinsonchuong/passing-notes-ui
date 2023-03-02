@@ -49,3 +49,33 @@ also compiling npm packages as needed. Other files are served as static files.
 
 Currently, `serveUi` compiles as needed on each request. In the future, it may
 instead compile only when files change.
+
+Optionally, "virtual files" can be specified.
+
+```javascript
+import {compose, Logger} from 'passing-notes'
+import serveUi from 'passing-notes-ui'
+
+const logger = new Logger()
+
+export default compose(
+  serveUi({
+    logger,
+    path: './ui',
+    files: {
+      'index.html': `
+        <!doctype html>
+        <script type="module" src="/index.js"></script>
+      `,
+      'index.js': `
+        import text from './text.js'
+        document.body.textContent = text
+      `
+    }
+  }),
+  () => () => ({status: 404})
+)
+```
+
+These virtual files are compiled and served as if they were written directly to
+the file system at the given paths.

@@ -6870,6 +6870,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     semantic-release: ^20.1.0
+    strip-indent: ^4.0.0
     xo: ^0.53.1
   bin:
     serve-ui: cli/serve-ui.js

@@ -132,3 +132,71 @@ test('serving a UI during development', async (t) => {
   t.like(logs.shift(), {message: 'Compiling UI'})
   t.like(logs.shift(), {level: 'ERROR'})
 })
+
+test('providing additional files as strings', async (t) => {
+  const directory = await useTemporaryDirectory(t)
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
+
+  const logger = new Logger()
+  logger.on('log', (entry) => {
+    t.log(entry)
+  })
+
+  const server = await startServer(
+    {port: 10_002},
+    compose(
+      serveUi({
+        path: directory.path,
+        files: {
+          'index.html': `
+            <!doctype html>
+            <meta charset="utf-8">
+            <script type="module" src="/index.js"></script>
+            <div id="app"></div>
+          `,
+          'index.js': `
+            import text from './text.js'
+            document.querySelector('#app').textContent = text
+          `,
+          'other.js': `
+            export default 'World!'
+          `,
+        },
+        logger,
+      }),
+      () => () => ({status: 404}),
+    ),
+  )
+  t.teardown(async () => {
+    await stopServer(server)
+  })
+
+  await directory.writeFile(
+    'text.js',
+    `
+    import otherText from './other.js'
+    export default 'Hello ' + otherText
+  `,
+  )
+
+  const tab = await openTab(browser, 'http://localhost:10002', {
+    timeout: 10_000,
+  })
+  await findElement(tab, 'div', 'Hello World!')
+
+  await directory.writeFile(
+    'text.js',
+    `
+    export default 'Bye Now!'
+  `,
+  )
+
+  await navigate(tab, 'http://localhost:10002', {timeout: 10_000})
+  await findElement(tab, 'div', 'Bye Now!')
+
+  t.pass()
+})

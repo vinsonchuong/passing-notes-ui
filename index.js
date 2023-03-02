@@ -1,11 +1,17 @@
 import path from 'node:path'
 import serveStatic from 'passing-notes-static'
 import flowRight from 'lodash/flowRight.js'
+import stripIndent from 'strip-indent'
 import {compileFile, compilePackages, formatFrame} from './lib/index.js'
 
 const packageDirectory = './node_modules/.cache/passing-notes-ui/packages'
 
-export default function ({path: directory, logger}) {
+export default function ({path: directory, files = {}, logger}) {
+  const virtualFiles = {}
+  for (const [filePath, fileContents] of Object.entries(files)) {
+    virtualFiles[path.join(directory, filePath)] = stripIndent(fileContents)
+  }
+
   return flowRight(
     serveStatic(packageDirectory, '/npm'),
     (next) => async (request) => {
@@ -25,7 +31,7 @@ export default function ({path: directory, logger}) {
           topic: 'UI',
           message: 'Compiling UI',
         })
-        const {code, dependencies} = await compileFile(filePath)
+        const {code, dependencies} = await compileFile(filePath, virtualFiles)
         finishCompileFile({message: 'Finished'})
 
         await compilePackages(dependencies, logger)
@@ -71,6 +77,7 @@ export default function ({path: directory, logger}) {
         return {status: 500}
       }
     },
+    serveStatic(files),
     serveStatic(directory),
   )
 }
