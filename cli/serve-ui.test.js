@@ -31,7 +31,7 @@ test('quickly serving a UI from the command line', async (t) => {
     command: ['npm', 'start'],
     cwd: directory.path,
     env: {
-      PORT: '10002',
+      PORT: '10100',
     },
   })
 
@@ -42,7 +42,7 @@ test('quickly serving a UI from the command line', async (t) => {
     await closeBrowser(browser)
   })
 
-  const tab = await openTab(browser, 'http://localhost:10002', {
+  const tab = await openTab(browser, 'http://localhost:10100', {
     timeout: 10_000,
   })
   await findElement(tab, 'div', 'Hello World!')
