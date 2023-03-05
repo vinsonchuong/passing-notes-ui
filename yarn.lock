@@ -2777,6 +2777,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-module-lexer@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "es-module-lexer@npm:1.2.0"
+  checksum: a0b865641ae52093fa3dffc41f3c440ac97b9932156896daa7784e66f01bef40f15b5578540f91cb4a43c38adda4a8ab8afca395b3b25480007d741ff0642de3
+  languageName: node
+  linkType: hard
+
 "es-shim-unscopables@npm:^1.0.0":
   version: 1.0.0
   resolution: "es-shim-unscopables@npm:1.0.0"
@@ -6858,12 +6865,15 @@ __metadata:
     ava-patterns: ^3.2.0
     cjs-module-lexer: ^1.2.2
     enhanced-resolve: ^5.12.0
+    es-module-lexer: ^1.2.0
     esbuild: ^0.17.10
     goober: ^2.1.12
     htm: ^3.1.1
     lodash: ^4.17.21
+    p-event: ^5.0.1
     passing-notes: ^6.5.7
     passing-notes-static: ^1.3.0
+    pify: ^6.1.0
     puppet-strings: ^4.1.3
     puppet-strings-chrome: ^2.0.3
     quick-install: ^2.0.3
@@ -7023,6 +7033,13 @@ __metadata:
   version: 5.0.0
   resolution: "pify@npm:5.0.0"
   checksum: 443e3e198ad6bfa8c0c533764cf75c9d5bc976387a163792fb553ffe6ce923887cf14eebf5aea9b7caa8eab930da8c33612990ae85bd8c2bc18bedb9eae94ecb
+  languageName: node
+  linkType: hard
+
+"pify@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "pify@npm:6.1.0"
+  checksum: cb21ee8794e9e14955669fbc06b964d0dd3d4e6fa3c2ea3cf22f6794de61ec1ea5c1fac02dadfd4aa16c9cf589f6733406e826e64366f70e09f5e95917a0b8ac
   languageName: node
   linkType: hard
 
