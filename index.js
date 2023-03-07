@@ -2,18 +2,21 @@ import path from 'node:path'
 import serveStatic from 'passing-notes-static'
 import flowRight from 'lodash/flowRight.js'
 import stripIndent from 'strip-indent'
+import slugify from '@sindresorhus/slugify'
 import {compileFile, compilePackages, formatFrame} from './lib/index.js'
 
 const packageDirectory = './node_modules/.cache/passing-notes-ui/packages'
 
 export default function ({path: directory, files = {}, logger}) {
+  const packageSubdirectory = path.join(packageDirectory, slugify(directory))
+
   const virtualFiles = {}
   for (const [filePath, fileContents] of Object.entries(files)) {
     virtualFiles[path.join(directory, filePath)] = stripIndent(fileContents)
   }
 
   return flowRight(
-    serveStatic(packageDirectory, '/npm'),
+    serveStatic(packageSubdirectory, '/npm'),
     (next) => async (request) => {
       if (request.url.startsWith('/npm/')) {
         return {status: 404}
@@ -34,7 +37,7 @@ export default function ({path: directory, files = {}, logger}) {
         const {code, dependencies} = await compileFile(filePath, virtualFiles)
         finishCompileFile({message: 'Finished'})
 
-        await compilePackages(dependencies, logger)
+        await compilePackages(dependencies, packageSubdirectory, logger)
 
         return {
           status: 200,

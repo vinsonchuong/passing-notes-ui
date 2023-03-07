@@ -23,6 +23,7 @@
   "type": "module",
   "dependencies": {
     "@babel/code-frame": "^7.18.6",
+    "@sindresorhus/slugify": "^2.2.0",
     "cjs-module-lexer": "^1.2.2",
     "enhanced-resolve": "^5.12.0",
     "es-module-lexer": "^1.2.0",
