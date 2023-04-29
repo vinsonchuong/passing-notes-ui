@@ -1,6 +1,12 @@
 import test from 'ava'
 import {useTemporaryDirectory} from 'ava-patterns'
-import {closeBrowser, openTab, navigate, findElement} from 'puppet-strings'
+import {
+  closeBrowser,
+  openTab,
+  navigate,
+  findElement,
+  evalInTab,
+} from 'puppet-strings'
 import {openChrome} from 'puppet-strings-chrome'
 import {startServer, stopServer, compose, Logger} from 'passing-notes'
 import serveUi from './index.js'
@@ -60,7 +66,7 @@ test('serving a UI during development', async (t) => {
   await directory.writeFile(
     'index.js',
     `
-    import {html} from 'htm/react/index.mjs'
+    import {html} from 'htm/react'
     import {render} from 'react-dom'
 
     render(
@@ -89,7 +95,7 @@ test('serving a UI during development', async (t) => {
   await directory.writeFile(
     'index.js',
     `
-    import {html} from 'htm/react/index.mjs'
+    import {html} from 'htm/react'
     import {render} from 'react-dom'
     import something from 'missing-package'
 
@@ -114,7 +120,7 @@ test('serving a UI during development', async (t) => {
   await directory.writeFile(
     'index.js',
     `
-    import {html} from 'htm/react/index.mjs'
+    import {html} from 'htm/react'
     import {render} from 'react-dom'
 
     import badSyntax of 'something'
@@ -199,4 +205,58 @@ test('providing additional files as strings', async (t) => {
   await findElement(tab, 'div', 'Bye Now!')
 
   t.pass()
+})
+
+test('serving CSS files exported by npm packages', async (t) => {
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
+
+  const directory = await useTemporaryDirectory(t)
+
+  const logger = new Logger()
+  const logs = []
+  logger.on('log', (entry) => {
+    t.log(entry)
+    logs.push(entry)
+  })
+
+  const server = await startServer(
+    {port: 10_003},
+    compose(serveUi({path: directory.path, logger}), () => () => ({
+      status: 404,
+    })),
+  )
+  t.teardown(async () => {
+    await stopServer(server)
+  })
+
+  await directory.writeFile(
+    'index.html',
+    `
+    <!doctype html>
+    <meta charset="utf-8">
+    <title>App</title>
+    <link href="/npm/the-new-css-reset/css/reset.css" rel="stylesheet">
+    <h1>Hello World!</h1>
+  `,
+  )
+
+  const tab = await openTab(browser, 'http://localhost:10003', {
+    timeout: 10_000,
+  })
+  await findElement(tab, 'h1')
+  t.is(
+    await evalInTab(
+      tab,
+      [],
+      `
+      const h1 = document.querySelector('h1')
+      const styles = window.getComputedStyle(h1)
+      return styles['font-size']
+    `,
+    ),
+    '16px',
+  )
 })

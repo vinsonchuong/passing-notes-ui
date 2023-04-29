@@ -15,7 +15,35 @@ export default function ({path: directory, files = {}, logger}) {
     virtualFiles[path.join(directory, filePath)] = stripIndent(fileContents)
   }
 
+  const dependencies = new Set()
+  const modulePattern =
+    /^(@[a-z\d-~][a-z\d-._~]*\/)?[a-z\d-~][a-z\d-._~]*(\/.|$)/
+
   return flowRight(
+    (next) => async (request) => {
+      if (
+        !request.url.startsWith('/npm/') ||
+        request.url.startsWith('/npm/_chunks/')
+      ) {
+        return next(request)
+      }
+
+      const modulePath = request.url.slice(5)
+      if (!modulePattern.test(modulePath)) {
+        return {status: 404}
+      }
+
+      if (!dependencies.has(modulePath)) {
+        dependencies.add(modulePath)
+        await compilePackages(dependencies, packageSubdirectory, logger)
+      }
+
+      return next({
+        ...request,
+        url:
+          path.extname(request.url) === '' ? `${request.url}.js` : request.url,
+      })
+    },
     serveStatic(packageSubdirectory, '/npm'),
     (next) => async (request) => {
       if (request.url.startsWith('/npm/')) {
@@ -34,10 +62,17 @@ export default function ({path: directory, files = {}, logger}) {
           topic: 'UI',
           message: 'Compiling UI',
         })
-        const {code, dependencies} = await compileFile(filePath, virtualFiles)
+        const {code, dependencies: bundleDependencies} = await compileFile(
+          filePath,
+          virtualFiles,
+        )
+        for (const dependency of bundleDependencies) {
+          dependencies.add(dependency)
+        }
+
         finishCompileFile({message: 'Finished'})
 
-        await compilePackages(dependencies, packageSubdirectory, logger)
+        await compilePackages(bundleDependencies, packageSubdirectory, logger)
 
         return {
           status: 200,

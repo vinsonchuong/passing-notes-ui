@@ -45,7 +45,20 @@ export default compose(
 ```
 
 `serveUi` will compile any JavaScript (`.js`) files requested by the browser,
-also compiling npm packages as needed. Other files are served as static files.
+bundling project source code into a single file. Any npm packages imported via
+bare specifiers (e.g. `'react'`) are externalized and bundled separately and
+ultimately imported via HTTP:
+
+```javascript
+import React from '/npm/react'
+```
+
+JavaScript, CSS, and other files from npm packages can be requested directly via
+URL:
+
+```html
+<link href="/npm/the-new-css-reset/css/reset.css" rel="stylesheet">
+```
 
 Currently, `serveUi` compiles as needed on each request. In the future, it may
 instead compile only when files change.

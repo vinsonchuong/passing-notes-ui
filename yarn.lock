@@ -956,6 +956,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hast@npm:^2.0.0":
+  version: 2.3.4
+  resolution: "@types/hast@npm:2.3.4"
+  dependencies:
+    "@types/unist": "*"
+  checksum: fff47998f4c11e21a7454b58673f70478740ecdafd95aaf50b70a3daa7da9cdc57315545bf9c039613732c40b7b0e9e49d11d03fe9a4304721cdc3b29a88141e
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:*":
   version: 7.0.8
   resolution: "@types/json-schema@npm:7.0.8"
@@ -1056,6 +1065,13 @@ __metadata:
   version: 7.3.13
   resolution: "@types/semver@npm:7.3.13"
   checksum: 00c0724d54757c2f4bc60b5032fe91cda6410e48689633d5f35ece8a0a66445e3e57fa1d6e07eb780f792e82ac542948ec4d0b76eb3484297b79bd18b8cf1cb0
+  languageName: node
+  linkType: hard
+
+"@types/unist@npm:*":
+  version: 2.0.6
+  resolution: "@types/unist@npm:2.0.6"
+  checksum: 25cb860ff10dde48b54622d58b23e66214211a61c84c0f15f88d38b61aa1b53d4d46e42b557924a93178c501c166aa37e28d7f6d994aba13d24685326272d5db
   languageName: node
   linkType: hard
 
@@ -1186,6 +1202,18 @@ __metadata:
     "@typescript-eslint/types": 5.54.0
     eslint-visitor-keys: ^3.3.0
   checksum: 17fc323c09e6272b603cdaec30a99916600fbbb737e1fbc8c1727a487753b4363cea112277fa43e0562bff34bdd1de9ad73ff9433118b1fd469b112fad0313ca
+  languageName: node
+  linkType: hard
+
+"@wooorm/starry-night@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@wooorm/starry-night@npm:2.0.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+    import-meta-resolve: ^2.0.0
+    vscode-oniguruma: ^1.0.0
+    vscode-textmate: ^9.0.0
+  checksum: 8bd3fec9eee04fd00277cc3ad0e0544e91362620289d79ed160e0d65fa66aef269d84a6b798cd17ebdcca605badfd4cd47f18a66c73431fec521a1502d4bb733
   languageName: node
   linkType: hard
 
@@ -4377,6 +4405,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"import-meta-resolve@npm:^2.0.0":
+  version: 2.2.2
+  resolution: "import-meta-resolve@npm:2.2.2"
+  checksum: 3a5910a6f914b5f06b307d7d1c25710bc56f12e21e923d5b2180dd0d53c6c2d51e7b55df26f168b63f5670babcaca9422b7a9429e877bbb8c1997d79bd65882b
+  languageName: node
+  linkType: hard
+
 "import-modules@npm:^2.1.0":
   version: 2.1.0
   resolution: "import-modules@npm:2.1.0"
@@ -6888,6 +6923,7 @@ __metadata:
     "@babel/code-frame": ^7.18.6
     "@material-ui/core": ^4.12.4
     "@sindresorhus/slugify": ^2.2.0
+    "@wooorm/starry-night": ^2.0.0
     ava: ^4.3.3
     ava-patterns: ^3.2.0
     cjs-module-lexer: ^1.2.2
@@ -6909,6 +6945,7 @@ __metadata:
     semantic-release: ^20.1.0
     solid-js: ^1.7.3
     strip-indent: ^4.0.0
+    the-new-css-reset: ^1.8.4
     xo: ^0.53.1
   bin:
     serve-ui: cli/serve-ui.js
@@ -8608,6 +8645,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"the-new-css-reset@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "the-new-css-reset@npm:1.8.4"
+  checksum: a56c901efa50de5fd6690727e4b1f45fb1af57d54de10a2f396cfb4d607d2d16ce5ba42045cba88ce61dab42060ea58304b499195300ec3018fc22aab72c7f26
+  languageName: node
+  linkType: hard
+
 "through2@npm:^4.0.0":
   version: 4.0.2
   resolution: "through2@npm:4.0.2"
@@ -9016,6 +9060,20 @@ __metadata:
   dependencies:
     builtins: ^5.0.0
   checksum: a32fd537bad17fcb59cfd58ae95a414d443866020d448ec3b22e8d40550cb585026582a57efbe1f132b882eea4da8ac38ee35f7be0dd72988a3cb55d305a20c1
+  languageName: node
+  linkType: hard
+
+"vscode-oniguruma@npm:^1.0.0":
+  version: 1.7.0
+  resolution: "vscode-oniguruma@npm:1.7.0"
+  checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
+  languageName: node
+  linkType: hard
+
+"vscode-textmate@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "vscode-textmate@npm:9.0.0"
+  checksum: 17f5e1e9ad4b56d15e29826a440054d9f50b65b25c8ba189ce36972dca003b5e68318d3703ec5f575104c4423463dff3944464c67027d9b88f91aa0e8e5f0296
   languageName: node
   linkType: hard
 
