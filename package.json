@@ -24,6 +24,7 @@
   "dependencies": {
     "@babel/code-frame": "^7.21.4",
     "@sindresorhus/slugify": "^2.2.0",
+    "builtins": "^5.0.1",
     "cjs-module-lexer": "^1.2.2",
     "enhanced-resolve": "^5.13.0",
     "es-module-lexer": "^1.2.1",
@@ -47,6 +48,7 @@
     "quick-install": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "recast": "^0.22.0",
     "semantic-release": "^21.0.2",
     "solid-js": "^1.7.3",
     "the-new-css-reset": "^1.8.4",
