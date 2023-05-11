@@ -260,3 +260,54 @@ test('serving CSS files exported by npm packages', async (t) => {
     '16px',
   )
 })
+
+test('importing packages that rely on Node builtins', async (t) => {
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
+
+  const directory = await useTemporaryDirectory(t)
+
+  const logger = new Logger()
+  const logs = []
+  logger.on('log', (entry) => {
+    t.log(entry)
+    logs.push(entry)
+  })
+
+  const server = await startServer(
+    {port: 10_004},
+    compose(serveUi({path: directory.path, logger}), () => () => ({
+      status: 404,
+    })),
+  )
+  t.teardown(async () => {
+    await stopServer(server)
+  })
+
+  await directory.writeFile(
+    'index.html',
+    `
+    <!doctype html>
+    <meta charset="utf-8">
+    <title>App</title>
+    <script type="module" src="/index.js"></script>
+  `,
+  )
+  await directory.writeFile(
+    'index.js',
+    `
+    import * as recast from 'recast'
+    document.body.textContent = 'Import Successful'
+  `,
+  )
+
+  const tab = await openTab(browser, 'http://localhost:10004', {
+    timeout: 10_000,
+  })
+
+  await findElement(tab, 'body', 'Import Successful')
+
+  t.pass()
+})
