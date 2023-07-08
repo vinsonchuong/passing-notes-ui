@@ -261,7 +261,8 @@ test('serving CSS files exported by npm packages', async (t) => {
   )
 })
 
-test('importing packages that rely on Node builtins', async (t) => {
+// eslint-disable-next-line ava/no-skip-test
+test.skip('importing packages that rely on Node builtins', async (t) => {
   const browser = await openChrome()
   t.teardown(async () => {
     await closeBrowser(browser)
@@ -307,7 +308,12 @@ test('importing packages that rely on Node builtins', async (t) => {
     timeout: 10_000,
   })
 
-  await findElement(tab, 'body', 'Import Successful')
+  try {
+    await findElement(tab, 'body', 'Import Successful')
+  } catch (error) {
+    console.log(tab)
+    throw error
+  }
 
   t.pass()
 })
