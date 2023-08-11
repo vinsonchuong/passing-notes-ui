@@ -1071,10 +1071,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tinyhttp/etag@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "@tinyhttp/etag@npm:2.0.6"
-  checksum: 1b73d20a463c713e31656775eee685a8e6a326cc75437372b6ab7af11d9117515a1bbc1e601deb9e28ef5ca847acfa3fd9d408542aa67983b102c711f079e23a
+"@tinyhttp/etag@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@tinyhttp/etag@npm:2.1.0"
+  checksum: 0de0277b439c307bdd3911fef43fb66a21f578b35f58b0eda195d56dc25c5808b6ecfdbd7a4cd314f4237ca8a510efd276e7cd90cd2cde11a5ff279728d4ee58
   languageName: node
   linkType: hard
 
@@ -7757,11 +7757,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"passing-notes-static@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "passing-notes-static@npm:1.3.0"
+"passing-notes-static@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "passing-notes-static@npm:1.3.2"
   dependencies:
-    "@tinyhttp/etag": ^2.0.6
+    "@tinyhttp/etag": ^2.1.0
     content-type: ^1.0.5
     fresh: ^0.5.2
     mime: ^3.0.0
@@ -7769,7 +7769,7 @@ __metadata:
     url-parse: ^1.5.10
   peerDependencies:
     passing-notes: ^6.2.0
-  checksum: e9dd3663b7dc07f956e7ae89356e0359de408475c5168c4770561494412215b6019fed55a18f9b4f1a68920019a1ba3fdffa0a3fe6483557811ef684ff74993a
+  checksum: 268c96a4d096d7ffcdc7fbcbe468ac79dc0748706286f94e05879d6849d0cc215c6814b83d40bc54f435a4123776c5b85a658d38cd8c0feb4969ffb319443c1c
   languageName: node
   linkType: hard
 
@@ -7793,16 +7793,16 @@ __metadata:
     lodash: ^4.17.21
     p-event: ^6.0.0
     passing-notes: ^6.6.1
-    passing-notes-static: ^1.3.0
+    passing-notes-static: ^1.3.2
     pify: ^6.1.0
     puppet-strings: ^5.0.1
     puppet-strings-chrome: ^2.0.3
     quick-install: ^2.0.3
     react: ^18.2.0
     react-dom: ^18.2.0
-    recast: ^0.23.3
+    recast: ^0.23.4
     semantic-release: ^21.0.7
-    solid-js: ^1.7.10
+    solid-js: ^1.7.11
     strip-indent: ^4.0.0
     the-new-css-reset: ^1.9.0
     xo: ^0.55.1
@@ -8585,16 +8585,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recast@npm:^0.23.3":
-  version: 0.23.3
-  resolution: "recast@npm:0.23.3"
+"recast@npm:^0.23.4":
+  version: 0.23.4
+  resolution: "recast@npm:0.23.4"
   dependencies:
     assert: ^2.0.0
     ast-types: ^0.16.1
     esprima: ~4.0.0
     source-map: ~0.6.1
     tslib: ^2.0.1
-  checksum: b1340ab0a3a8e4bf206c6c7d54168f7019ed4138a53bc746df230c01f1b6672ce9d25dceb34896b6683622d3eede4e1f18b7d0b672f5aab54ba7762de949e317
+  checksum: edb63bbe0457e68c0f4892f55413000e92aa7c5c53f9e109ab975d1c801cd299a62511ea72734435791f4aea6f0edf560f6a275761f66b2b6069ff6d72686029
   languageName: node
   linkType: hard
 
@@ -9191,13 +9191,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"solid-js@npm:^1.7.10":
-  version: 1.7.10
-  resolution: "solid-js@npm:1.7.10"
+"solid-js@npm:^1.7.11":
+  version: 1.7.11
+  resolution: "solid-js@npm:1.7.11"
   dependencies:
     csstype: ^3.1.0
     seroval: ^0.5.0
-  checksum: e0c35e6a20cb856aefab3bd8e09cac2e398e2b7b36eee30092ec53407040a2dfae09b0542cd7137199d9d8f83aa991df6974316ca9e27fb8cabc0365f73dff8c
+  checksum: 692f6499adea139aa7f61770277162b0460c7f2de373bfbfa20ee208d970e8b25bdfc07fce70ef03150d766dae506998878168a9a313b51789211153669abbc6
   languageName: node
   linkType: hard
 

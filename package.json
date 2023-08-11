@@ -31,7 +31,7 @@
     "esbuild-plugins-node-modules-polyfill": "^1.3.0",
     "lodash": "^4.17.21",
     "passing-notes": "^6.6.1",
-    "passing-notes-static": "^1.3.0",
+    "passing-notes-static": "^1.3.2",
     "strip-indent": "^4.0.0"
   },
   "devDependencies": {
@@ -48,9 +48,9 @@
     "quick-install": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "recast": "^0.23.3",
+    "recast": "^0.23.4",
     "semantic-release": "^21.0.7",
-    "solid-js": "^1.7.10",
+    "solid-js": "^1.7.11",
     "the-new-css-reset": "^1.9.0",
     "xo": "^0.55.1"
   },
