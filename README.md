@@ -92,3 +92,44 @@ export default compose(
 
 These virtual files are compiled and served as if they were written directly to
 the file system at the given paths.
+
+Internally, caches and resources are setup to speed up compilation, which may
+prevent the process from exiting, especially in automated test. There is a
+`teardown` function that will clean up these caches and resources:
+
+```javascript
+import test from 'ava'
+import {compose, Logger, startServer, stopServer} from 'passing-notes'
+import serveUi, {teardown} from 'passing-notes-ui'
+
+test('serving a UI', async (t) => {
+  const logger = new Logger()
+
+  const server = await startServer(
+    {port: 10_000},
+    compose(
+      serveUi({
+        logger,
+        path: './ui',
+        files: {
+          'index.html': `
+            <!doctype html>
+            <script type="module" src="/index.js"></script>
+          `,
+          'index.js': `
+            document.body.textContent = 'Hello World!'
+          `
+        }
+      }),
+      () => () => ({status: 404})
+    )
+  )
+
+  t.teardown(async () => {
+    await stopServer(server)
+    await teardown()
+  })
+
+  t.pass()
+})
+```

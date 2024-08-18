@@ -9,7 +9,7 @@ import {
 } from 'puppet-strings'
 import {openChrome} from 'puppet-strings-chrome'
 import {startServer, stopServer, compose, Logger} from 'passing-notes'
-import serveUi from './index.js'
+import serveUi, {teardown} from './index.js'
 
 test('serving a UI during development', async (t) => {
   const browser = await openChrome()
@@ -34,6 +34,7 @@ test('serving a UI during development', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
+    await teardown()
   })
 
   await directory.writeFile(
@@ -179,6 +180,7 @@ test('providing additional files as strings', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
+    await teardown()
   })
 
   await directory.writeFile(
@@ -230,6 +232,7 @@ test('serving CSS files exported by npm packages', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
+    await teardown()
   })
 
   await directory.writeFile(

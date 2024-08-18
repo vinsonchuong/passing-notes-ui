@@ -4,6 +4,7 @@ import flowRight from 'lodash/flowRight.js'
 import stripIndent from 'strip-indent'
 import slugify from '@sindresorhus/slugify'
 import {compileFile, compilePackages, formatFrame} from './lib/index.js'
+import {teardown as teardownCompileFile} from './lib/compile-file/index.js'
 
 const packageDirectory = './node_modules/.cache/passing-notes-ui/packages'
 
@@ -118,4 +119,8 @@ export default function ({path: directory, files = {}, logger}) {
     serveStatic(files),
     serveStatic(directory),
   )
+}
+
+export async function teardown() {
+  await teardownCompileFile()
 }
