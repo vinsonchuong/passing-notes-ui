@@ -8,7 +8,7 @@ import {teardown as teardownCompileFile} from './lib/compile-file/index.js'
 
 const packageDirectory = './node_modules/.cache/passing-notes-ui/packages'
 
-export default function ({path: directory, files = {}, logger}) {
+export default function serveUi({path: directory, files = {}, logger}) {
   const packageSubdirectory = path.join(packageDirectory, slugify(directory))
 
   const virtualFiles = {}

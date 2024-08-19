@@ -11,12 +11,11 @@ import {openChrome} from 'puppet-strings-chrome'
 import {startServer, stopServer, compose, Logger} from 'passing-notes'
 import serveUi, {teardown} from './index.js'
 
-test('serving a UI during development', async (t) => {
-  const browser = await openChrome()
-  t.teardown(async () => {
-    await closeBrowser(browser)
-  })
+test.after(async () => {
+  await teardown()
+})
 
+test('serving a UI during development', async (t) => {
   const directory = await useTemporaryDirectory(t)
 
   const logger = new Logger()
@@ -34,7 +33,6 @@ test('serving a UI during development', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
-    await teardown()
   })
 
   await directory.writeFile(
@@ -54,6 +52,11 @@ test('serving a UI during development', async (t) => {
     document.querySelector('#app-container').textContent = 'Hello World!'
   `,
   )
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
 
   const tab = await openTab(browser, 'http://localhost:10001', {
     timeout: 10_000,
@@ -143,11 +146,6 @@ test('serving a UI during development', async (t) => {
 test('providing additional files as strings', async (t) => {
   const directory = await useTemporaryDirectory(t)
 
-  const browser = await openChrome()
-  t.teardown(async () => {
-    await closeBrowser(browser)
-  })
-
   const logger = new Logger()
   logger.on('log', (entry) => {
     t.log(entry)
@@ -180,7 +178,6 @@ test('providing additional files as strings', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
-    await teardown()
   })
 
   await directory.writeFile(
@@ -190,6 +187,11 @@ test('providing additional files as strings', async (t) => {
     export default 'Hello ' + otherText
   `,
   )
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
 
   const tab = await openTab(browser, 'http://localhost:10002', {
     timeout: 10_000,
@@ -210,11 +212,6 @@ test('providing additional files as strings', async (t) => {
 })
 
 test('serving CSS files exported by npm packages', async (t) => {
-  const browser = await openChrome()
-  t.teardown(async () => {
-    await closeBrowser(browser)
-  })
-
   const directory = await useTemporaryDirectory(t)
 
   const logger = new Logger()
@@ -232,7 +229,6 @@ test('serving CSS files exported by npm packages', async (t) => {
   )
   t.teardown(async () => {
     await stopServer(server)
-    await teardown()
   })
 
   await directory.writeFile(
@@ -245,6 +241,11 @@ test('serving CSS files exported by npm packages', async (t) => {
     <h1>Hello World!</h1>
   `,
   )
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
 
   const tab = await openTab(browser, 'http://localhost:10003', {
     timeout: 10_000,
@@ -266,11 +267,6 @@ test('serving CSS files exported by npm packages', async (t) => {
 
 // eslint-disable-next-line ava/no-skip-test
 test.skip('importing packages that rely on Node builtins', async (t) => {
-  const browser = await openChrome()
-  t.teardown(async () => {
-    await closeBrowser(browser)
-  })
-
   const directory = await useTemporaryDirectory(t)
 
   const logger = new Logger()
@@ -306,6 +302,11 @@ test.skip('importing packages that rely on Node builtins', async (t) => {
     document.body.textContent = 'Import Successful'
   `,
   )
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
 
   const tab = await openTab(browser, 'http://localhost:10004', {
     timeout: 10_000,
