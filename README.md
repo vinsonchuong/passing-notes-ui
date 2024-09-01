@@ -63,6 +63,8 @@ URL:
 Currently, `serveUi` compiles as needed on each request. In the future, it may
 instead compile only when files change.
 
+### Virtual Files
+
 Optionally, "virtual files" can be specified.
 
 ```javascript
@@ -92,6 +94,56 @@ export default compose(
 
 These virtual files are compiled and served as if they were written directly to
 the file system at the given paths.
+
+### Code Splitting
+
+Code splitting is accomplished by having the browser import from different
+entry points. A bundle is created for each entry point.
+
+If both bundles end up importing the same file, the code in that file is
+duplicated into both bundles.
+
+To prevent such duplication, "boundaries" can be defined. Bundles will never
+include files that cross a boundary, leaving them to be imported via HTTP at
+runtime.
+
+Here's an intended example use case:
+
+```javascript
+import {compose, Logger} from 'passing-notes'
+import serveUi from 'passing-notes-ui'
+
+const logger = new Logger()
+
+export default compose(
+  serveUi({
+    path: './ui',
+    boundaries: ['./ui/lib/*'],
+    logger
+  }),
+  () => () => ({status: 404})
+)
+```
+
+If the main entry point for the app is at `./ui/index.js` and that file imports
+`./ui/lib/one/index.js` and `./ui/lib/two/index.js`, three bundles will be
+created:
+
+- A bundle including `./ui/lib/one/index.js` and any files it imports from
+  within `./ui/lib/one/`
+- A bundle including `./ui/lib/two/index.js` and any files it imports from
+  within `./ui/lib/two/`
+- A bundle including `./ui/index.js` and any files it imports that are outside
+  of `./ui/lib`
+
+Note that files within `./ui/lib/one/` should only import files from within
+`./ui/lib/one/`. If they import files in outer directories, additional bundles
+will be created.
+
+These boundaries should correspond to actual boundaries within the codebase
+where imports that cross are strictly controlled.
+
+### Automated Testing
 
 Internally, caches and resources are setup to speed up compilation, which may
 prevent the process from exiting, especially in automated test. There is a

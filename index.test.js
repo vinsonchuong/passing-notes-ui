@@ -265,6 +265,81 @@ test('serving CSS files exported by npm packages', async (t) => {
   )
 })
 
+test('excluding paths from being bundled', async (t) => {
+  const directory = await useTemporaryDirectory(t)
+
+  const logger = new Logger()
+  logger.on('log', (entry) => {
+    t.log(entry)
+  })
+
+  const server = await startServer(
+    {port: 10_004},
+    compose(
+      serveUi({
+        path: directory.path,
+        boundaries: ['./lib/*'],
+        logger,
+      }),
+      () => () => ({status: 404}),
+    ),
+  )
+  t.teardown(async () => {
+    await stopServer(server)
+  })
+
+  await directory.writeFile(
+    'index.html',
+    `
+    <!doctype html>
+    <meta charset="utf-8">
+    <title>App</title>
+    <script type="module">
+      import singleton1 from '/one.js'
+      import singleton2 from '/two.js'
+
+      document.body.textContent =
+        singleton1 === singleton2
+          ? 'result: same'
+          : 'result: different'
+    </script>
+  `,
+  )
+
+  await directory.writeFile(
+    'one.js',
+    `
+      export {default} from './lib/singleton.js'
+  `,
+  )
+
+  await directory.writeFile(
+    'two.js',
+    `
+      export {default} from './lib/singleton.js'
+  `,
+  )
+
+  await directory.writeFile(
+    'lib/singleton.js',
+    `
+    export default { message: 'Hello World!' }
+  `,
+  )
+
+  const browser = await openChrome()
+  t.teardown(async () => {
+    await closeBrowser(browser)
+  })
+
+  const tab = await openTab(browser, 'http://localhost:10004', {
+    timeout: 10_000,
+  })
+  const element = await findElement(tab, 'body', 'result:')
+
+  t.is(element.textContent, 'result: same')
+})
+
 // eslint-disable-next-line ava/no-skip-test
 test.skip('importing packages that rely on Node builtins', async (t) => {
   const directory = await useTemporaryDirectory(t)

@@ -3,12 +3,18 @@ import serveStatic from 'passing-notes-static'
 import flowRight from 'lodash/flowRight.js'
 import stripIndent from 'strip-indent'
 import slugify from '@sindresorhus/slugify'
+import {glob} from 'glob'
 import {compileFile, compilePackages, formatFrame} from './lib/index.js'
 import {teardown as teardownCompileFile} from './lib/compile-file/index.js'
 
 const packageDirectory = './node_modules/.cache/passing-notes-ui/packages'
 
-export default function serveUi({path: directory, files = {}, logger}) {
+export default function serveUi({
+  path: directory,
+  files = {},
+  boundaries: boundaryPatterns = [],
+  logger,
+}) {
   const packageSubdirectory = path.join(packageDirectory, slugify(directory))
 
   const virtualFiles = {}
@@ -57,6 +63,11 @@ export default function serveUi({path: directory, files = {}, logger}) {
 
       const filePath = path.join(directory, request.url)
 
+      const boundaryDirectories = await glob(boundaryPatterns, {
+        cwd: directory,
+        absolute: true,
+      })
+
       try {
         const finishCompileFile = logger.measure({
           level: 'INFO',
@@ -66,6 +77,7 @@ export default function serveUi({path: directory, files = {}, logger}) {
         const {code, dependencies: bundleDependencies} = await compileFile(
           filePath,
           virtualFiles,
+          boundaryDirectories,
         )
         for (const dependency of bundleDependencies) {
           dependencies.add(dependency)
