@@ -179,9 +179,12 @@ test('serving a UI', async (t) => {
 
   t.teardown(async () => {
     await stopServer(server)
-    await teardown()
+    await teardown('./ui')
   })
 
   t.pass()
 })
 ```
+
+`teardown()` can optionally take in a directory path, only removing resources
+related to that directory and its descendents.
